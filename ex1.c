@@ -10,4 +10,5 @@ int main(){
     int s = (sec-h*3600-m*60);
     printf("%d secondes = %d heures, %d minutes, %d secondes", sec , h, m, s);
     return 0;
+
 }
