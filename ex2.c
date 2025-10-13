@@ -4,18 +4,20 @@
 int main()
 {
 
-    float pret;
+    float C;
     printf("Le montant du pret : ");
-    scanf("%f", &pret);
-    float taux;
+    scanf("%f", &C);
+    getchar();
+    float t;
     printf("Le taux anuel : ");
-    scanf("%d", &taux);
-    int duree;
+    scanf("%f", &t);
+    getchar();
+    int n;
     printf("La duree du pret en annees : ");
-    scanf("%f", &pret);
+    scanf("%d", &n);
 
-    float mensualite = (pret * (taux / 12)) / (1 - pow(1 + (taux / 12), -duree * 12));
+    float mensualite = (C * (t / 12)) / (1 - (pow(1 + (t / 12), n * 12)));
 
-    printf("La mensualite du pret est de : %.2f\n", mensualite);
+    printf("La mensualite du pret est de : %f\n",mensualite);
     return 0;
 }
