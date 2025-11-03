@@ -14,4 +14,5 @@ int main() {
 /*
 On rajoute la ligne :
 s[4] = '\0';
+car il manque le charactère de fin
 */
