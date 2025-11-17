@@ -17,9 +17,11 @@ int main()
     }
 
     int mid = width / 2;
+
+    // la pointe de l'étoile
     for (int i = 0; i < taille; i++)
     {
-        if (i == taille-1)
+        if (i == taille - 1)
         {
             for (int j = 0; j < width; j++)
             {
@@ -39,6 +41,23 @@ int main()
         }
     }
 
+    // le corps central de l'étoile
+    for (int i = taille; i < taille * 2 - 2; i++)
+    {
+        int taille_base = 2 * i - 2 * taille;
+        for (int j = taille_base; j < width - taille_base; j++)
+        {
+            img[i][j] = 'S';
+
+            if (j == taille_base || j == width-taille_base-1)
+            {
+                img[i][j] = '.';
+            }
+
+        }
+    }
+
+    // dessiner l'étoile
     for (int i = 0; i < 29; i++)
     {
         for (int j = 0; j < 121; j++)
