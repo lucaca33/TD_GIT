@@ -7,7 +7,13 @@ int main(){
     int width = taille*taille;
     int max_height = taille * 3 - 1;
     char img[112][30];
-
+    for (int i = 0; i < 111; i++)
+    {
+        for (int j = 0; j < 29; j++)
+        {
+            img[i][j] = ' ';
+        }
+    }
     
     return 0;
 }
