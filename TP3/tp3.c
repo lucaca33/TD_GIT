@@ -49,18 +49,53 @@ int main()
         {
             img[i][j] = 'S';
 
-            if (j == taille_base || j == width-taille_base-1)
+            if (j == taille_base || j == width - taille_base - 1)
             {
                 img[i][j] = '.';
             }
-
         }
     }
 
-    // dessiner l'étoile
-    for (int i = 0; i < 29; i++)
+    // les jambes
+    int k = taille * 2 - 2; // sert pour avoir le vrai indice i
+    for (int i = 0; i < taille + 1; i++)
     {
-        for (int j = 0; j < 121; j++)
+        // on remplis l'intérieur de S
+        for (int j = 0; j < width; j++)
+        {
+            img[k][j] = 'S';
+        }
+        // les bords
+        for (int j = 0; j < 2 * taille - 4 - i; j++)
+        {
+            img[k][j] = ' ';
+            img[k][width - j - 1] = ' ';
+            if (j == 2 * taille - 5 - i)
+            {
+                img[k][width - j - 1] = '.';
+                img[k][j] = '.';
+            }
+        }
+        // le centre
+        for (int j = mid - 2 * i; j < mid; j++)
+        {
+            img[k][j] = ' ';
+            img[k][width - j - 1] = ' ';
+            img[k][mid] = ' ';
+            if (j == mid - 2 * i)
+            {
+                img[k][width - j - 1] = '\"';
+                img[k][j] = '\"';
+            }
+        }
+
+        k++;
+    }
+
+    // dessiner l'étoile
+    for (int i = 0; i < max_height; i++)
+    {
+        for (int j = 0; j < width; j++)
         {
             printf("%c", img[i][j]);
         }
