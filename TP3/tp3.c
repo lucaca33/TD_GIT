@@ -52,6 +52,8 @@ int main()
             if (j == taille_base || j == width - taille_base - 1)
             {
                 img[i][j] = '.';
+                img[i][taille_base+1] = 'V';
+                img[i][width - taille_base-2] = 'V';
             }
         }
     }
