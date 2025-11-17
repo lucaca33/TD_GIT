@@ -3,6 +3,10 @@
 int main()
 {
     char plateau[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    int joueur = 1;
+    char coup[4];
+    printf("Joueur %d, entrez votre position (ligne colonne) : ", joueur);
+    fgets(coup, 4, stdin); // sa marche
     // afficher grille morpion
     for (int i = 0; i < 3; i++)
     {
