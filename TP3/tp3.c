@@ -14,6 +14,13 @@ int main(){
             img[i][j] = ' ';
         }
     }
+    for (int i = 0; i < 111; i++)
+    {
+        for (int j = 0; j < 29; j++)
+        {
+            printf("%c", img[i][j]);
+        }
+    }
     
     return 0;
 }
