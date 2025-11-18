@@ -19,7 +19,7 @@ int main()
             {
                 if (coup[2] == '1' || coup[2] == '2' || coup[2] == '3')
                 {
-                    if (plateau[coup[0] - 1][coup[2] - 1] == ' ' || plateau[coup[0] - 1][coup[2] - 1] == '\0') // je sais pas pourquoi mais sa me dit que y'a un \0 parfois
+                    if (plateau[coup[0] - '0' - 1][coup[2] - '0' - 1] == ' ' || plateau[coup[0] - '0' - 1][coup[2] - '0' - 1] == '\0') // je sais pas pourquoi mais sa me dit que y'a un \0 parfois
                     {
                         move_correct = 1;
                     }
