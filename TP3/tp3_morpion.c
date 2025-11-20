@@ -9,8 +9,6 @@ int main()
     int draw = 0;
     while (winner != 'X' && winner != 'O' && !draw) // oui
     {
-        printf("=========winner : %c ==%d========= ", winner, draw);
-
         // check pour voir si jamais le mec a mis une case pas bonne/ mal écrit. Ex : "101" est ok mais "001" non et "1a3" ok
         int move_correct = 0;
         printf("==============\n");
@@ -59,7 +57,7 @@ int main()
         }
 
         // check egalité
-        char winner = 'N';
+        winner = 'N';
         draw = 1;
         int case_restante = 0;
         for (int i = 0; i < 3; i++)
@@ -99,7 +97,6 @@ int main()
                 else
                 {
                     winner = ' ';
-
                     trouve = 0;
                     break; // on break parceque cette ligne ne peut plus gagner
                 }
@@ -108,8 +105,53 @@ int main()
             {
                 break;
             }
+            // colonne
+            if (plateau[0][i] == ' ' || plateau[0][i] == '\0')
+            {
+                point = 'r'; // caractère random, cette ligne ne peut pas faire gagner quelqu'un
+            }
+            else
+            {
+                point = plateau[0][i];
+            }
+            // on check voir si les deux autres sont les même que le premier
+            for (int j = 0; j < 3; j++)
+            {
+                if (plateau[j][i] == point)
+                {
+                    winner = point;
+                    trouve = 1; // on break pas : il faut vérifier que toute la ligne est bonne
+                }
+                else
+                {
+                    winner = ' ';
+                    trouve = 0;
+                    break; // on break parceque cette ligne ne peut plus gagner
+                }
+            }
+            if (trouve) // si on a trouve un GAGNANT HEHEHEHEHE on sort de la boule
+            {
+                break;
+            }
+            // check diagonales
+            if (plateau[1][1] != ' ') // sa sert a rien de les checks si le millieu est vide
+            {
+                // on sait que le millieu est pas vide donc on peut comparer les trois ensembles directement
+                if (plateau[0][0] == plateau[1][1] == plateau[2][2])
+                {
+                    winner = plateau[1][1];
+                    trouve = 1;
+                }
+                else if (plateau[2][0] == plateau[1][1] == plateau[0][2])
+                {
+                    winner = plateau[1][1];
+                    trouve = 1;
+                }
+            }
+            
         }
         // afficher grille morpion
+        printf("\n");
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -139,9 +181,8 @@ int main()
             }
             printf("\n");
         }
-        printf("=========winner : %c =========== ", winner);
     }
-
+    printf("===================\n");
     switch (winner)
     {
         // c'est censé mettre n mais sa met un espace donc dans le doute je fait sa et sa marche
@@ -160,5 +201,6 @@ int main()
     default:
         break;
     }
+    printf("\n===================");
     return 0;
 }
