@@ -5,14 +5,16 @@ int main()
     char plateau[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
     char winner = ' '; // 'N' pour égalité 'O' ou 'X' sinon
     int joueur = 1;
-    int winner_trouve = 0; // 0 pour non et 1 pour oui
     char coup[4];
-    while (winner_trouve == 0)
+    int draw = 0;
+    while (winner != 'X' && winner != 'O' && !draw) // oui
     {
+        printf("=========winner : %c ==%d========= ", winner, draw);
+
         // check pour voir si jamais le mec a mis une case pas bonne/ mal écrit. Ex : "101" est ok mais "001" non et "1a3" ok
         int move_correct = 0;
         printf("==============\n");
-        do
+        do // pour le faire au moins une fois, et continuer a le faire jusqu'a ce que la position est valide
         {
             printf("Joueur %d, entrez votre position (ligne colonne) : ", joueur);
             fgets(coup, 4, stdin); // sa marche
@@ -26,7 +28,7 @@ int main()
                     }
                     else
                     {
-                        printf("Case  deja prise, ressayez, %c %c, a%ca\n", coup[0], coup[2], plateau[coup[0]][coup[2]]);
+                        printf("Case  deja prise, ressayez");
                     }
                 }
                 else
@@ -57,60 +59,56 @@ int main()
         }
 
         // check egalité
-        char winner = ' ';
+        char winner = 'N';
+        draw = 1;
         int case_restante = 0;
-        winner_trouve = 1; // on sort de la boucle sauf si on trouve une case de libre
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
                 if (plateau[i][j] == ' ')
                 {
-                    winner = 'N';
-                    winner_trouve = 0; // on reste dans la boucle, il y a encore un case a jouer (le cas d'un gagnant est traité plus tard)
+                    winner = 'N'; // on sort pas, ya encore de move possibles
+                    draw = 0;
                 }
             }
         }
-        if (winner_trouve != 1)
+        // check des gagnants
+        char point = 'r';
+        int trouve = 0;
+        // la boucle se répete 3 fois pour chaque ligne et colonne
+        for (int i = 0; i < 3; i++)
         {
-            // check des gagnants
-            char point = 'r';
-            int trouve = 0;
-            // la boucle se répete 3 fois pour chaque ligne et colonne
-            for (int i = 0; i < 3; i++)
+            // ligne
+            if (plateau[i][0] == ' ' || plateau[i][0] == '\0')
             {
-                // ligne
-                if (plateau[i][0] == ' ' || plateau[i][0] == '\0')
+                point = 'r'; // caractère random, cette ligne ne peut pas faire gagner quelqu'un
+            }
+            else
+            {
+                point = plateau[i][0];
+            }
+            // on check voir si les deux autres sont les même que le premier
+            for (int j = 0; j < 3; j++)
+            {
+                if (plateau[i][j] == point)
                 {
-                    char point = 'r'; // caractère random, cette ligne ne peut pas faire gagner quelqu'un
+                    winner = point;
+                    trouve = 1; // on break pas : il faut vérifier que toute la ligne est bonne
                 }
                 else
                 {
-                    char point = plateau[i][0];
-                }
-                // on check voir si les deux autres sont les même que le premier
-                for (int j = 0; j < 3; j++)
-                {
-                    if (plateau[i][j] == point)
-                    {
-                        winner = point;
-                        trouve = 1; // on break pas : il faut vérifier que toute la ligne est bonne
-                    }
-                    else
-                    {
-                        winner = ' ';
-                        trouve = 0;
-                        break; // on break parceque cette ligne ne peut plus gagner
-                    }
+                    winner = ' ';
+
+                    trouve = 0;
+                    break; // on break parceque cette ligne ne peut plus gagner
                 }
             }
+            if (trouve) // si on a trouve un GAGNANT HEHEHEHEHE on sort de la boule
+            {
+                break;
+            }
         }
-        // sortir de la boucle en cas de gagnant
-        if (winner == 'O' || winner == 'X')
-        {
-            winner_trouve = 1;
-        }
-
         // afficher grille morpion
         for (int i = 0; i < 3; i++)
         {
@@ -139,26 +137,28 @@ int main()
                     }
                 }
             }
-
             printf("\n");
         }
+        printf("=========winner : %c =========== ", winner);
     }
+
     switch (winner)
     {
-        //c'est censé mettre n mais sa met un espace donc dans le doute je fait sa et sa marche
-    case 'N':
-        printf("Le match resulte en une egalite");
-        break;
+        // c'est censé mettre n mais sa met un espace donc dans le doute je fait sa et sa marche
     case ' ':
         printf("Le match resulte en une egalite");
         break;
     case '\0':
         printf("Le match resulte en une egalite");
         break;
-
+    case 'X':
+        printf("Le gagnant est X (joueur 1)");
+        break;
+    case '0':
+        printf("Le gagnant est 0 (joueur 2)");
+        break;
     default:
         break;
     }
-
     return 0;
 }
