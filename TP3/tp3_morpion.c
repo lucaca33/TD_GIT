@@ -143,10 +143,16 @@ int main()
             printf("\n");
         }
     }
-    printf("winner:%ca", winner);
     switch (winner)
     {
+        //c'est censé mettre n mais sa met un espace donc dans le doute je fait sa et sa marche
     case 'N':
+        printf("Le match resulte en une egalite");
+        break;
+    case ' ':
+        printf("Le match resulte en une egalite");
+        break;
+    case '\0':
         printf("Le match resulte en une egalite");
         break;
 
