@@ -133,22 +133,21 @@ int main()
             {
                 break;
             }
-            // check diagonales
-            if (plateau[1][1] != ' ') // sa sert a rien de les checks si le millieu est vide
+        }
+        // check diagonales
+        if (plateau[1][1] != ' ') // sa sert a rien de les checks si le millieu est vide
+        {
+            // on sait que le millieu est pas vide donc on peut comparer les trois ensembles directement
+            if (plateau[0][0] == plateau[1][1] && plateau[0][0] == plateau[2][2])
             {
-                // on sait que le millieu est pas vide donc on peut comparer les trois ensembles directement
-                if (plateau[0][0] == plateau[1][1] == plateau[2][2])
-                {
-                    winner = plateau[1][1];
-                    trouve = 1;
-                }
-                else if (plateau[2][0] == plateau[1][1] == plateau[0][2])
-                {
-                    winner = plateau[1][1];
-                    trouve = 1;
-                }
+                winner = plateau[1][1];
+                trouve = 1;
             }
-            
+            else if (plateau[2][0] == plateau[1][1] && plateau[2][0] ==  plateau[0][2])
+            {
+                winner = plateau[1][1];
+                trouve = 1;
+            }
         }
         // afficher grille morpion
         printf("\n");
