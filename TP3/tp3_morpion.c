@@ -194,8 +194,8 @@ int main()
     case 'X':
         printf("Le gagnant est X (joueur 1)");
         break;
-    case '0':
-        printf("Le gagnant est 0 (joueur 2)");
+    case 'O':
+        printf("Le gagnant est O (joueur 2)");
         break;
     default:
         break;
