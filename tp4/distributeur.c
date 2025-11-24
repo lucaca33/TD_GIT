@@ -6,10 +6,17 @@ void afficherMenu()
     printf("1. Faire un retrait\n");
     printf("2. Quitter\n");
 }
+
 int lireChoix(){
     printf("Votre choix : ");
     int temp = 0;
     scanf("%d", &temp);
+}
+
+void saisir_montant(){
+    printf("Montant a retirer : ");
+    int montant = 0;
+    scanf("%d", montant);
 }
 
 int main()
