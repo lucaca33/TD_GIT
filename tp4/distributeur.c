@@ -20,8 +20,8 @@ int saisir_montant(){
     return montant;
 }
 
-int montant_valide(){
-    if (saisir_montant() % 5 != 0)
+int montant_valide(int montant){
+    if (montant % 5 != 0)
     {
         printf("Erreur : montant invalide.\nLe montant doit etre en 5 et 1000 euros, divisible pas 5.");
         return 1;
