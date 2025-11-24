@@ -13,11 +13,22 @@ int lireChoix(){
     scanf("%d", &temp);
 }
 
-void saisir_montant(){
+int saisir_montant(){
     printf("Montant a retirer : ");
     int montant = 0;
     scanf("%d", montant);
+    return montant;
 }
+
+int montant_valide(){
+    if (saisir_montant() % 5 != 0)
+    {
+        printf("Erreur : montant invalide.\nLe montant doit etre en 5 et 1000 euros, divisible pas 5.");
+        return 1;
+    }
+    return 0;
+}
+
 
 int main()
 {
