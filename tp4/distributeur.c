@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "distributeur.h"
 
 void afficherMenu()
 {
