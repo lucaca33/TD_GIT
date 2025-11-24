@@ -146,6 +146,25 @@ void calculerMoyenneGenerale(int tab[30][3], int nb_eleves)
     return;
 }
 
+int trouverMeilleureNoteControle(int tab[30][3], int nb_eleves, int indiceControle)
+{
+    if (indiceControle < 0 || indiceControle > 2)
+    {
+        printf("L'incide du controle est incorrect");
+        return 0;
+    }
+    
+    int best = tab[0][indiceControle];
+    for (int i = 0; i < nb_eleves; i++)
+    {
+        if (tab[i][indiceControle] > best)
+        {
+            best = tab[i][indiceControle];
+        }
+    }
+    return best;
+}
+
 int main()
 {
     int nb_eleves = 0;
