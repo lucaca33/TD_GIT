@@ -57,7 +57,41 @@ void saisirNotes(int eleves[30][3], int nb_eleves)
                 printf("   Note du controle %d (0 a 20) : ", j + 1);
                 scanf("%d", &note);
             }
+            eleves[i][j] = note;
         }
+    }
+}
+
+void afficherNotes(int tab[30][3], int nb_eleves)
+{
+    printf("Tableau des notes\n");
+    printf("Eleve  C1  C2  C3");
+    for (int i = 0; i < nb_eleves; i++)
+    {
+        printf("\n   ");
+        if (i < 10)
+        {
+            printf(" ");
+        }
+        // note 1
+        printf("%d  ", i);
+        if (tab[i][0] < 10)
+        {
+            printf(" ");
+        }
+        printf("%d  ", tab[i][0]);
+        // note 2
+        if (tab[i][1] < 10)
+        {
+            printf(" ");
+        }
+        printf("%d  ", tab[i][1]);
+        // note 3
+        if (tab[i][2] < 10)
+        {
+            printf(" ");
+        }
+        printf("%d", tab[i][2]);
     }
 }
 
@@ -65,23 +99,26 @@ int main()
 {
     int nb_eleves = 0;
     int note_eleves[30][3];
+    for (int i = 0; i < 3; i++)
+    {
     afficherMenu();
     int choix = lireChoix();
-    
-    switch (choix)
-    {
-    case 1:
-        nb_eleves = saisirNombreEleves(note_eleves);
-        break;
-    case 2:
-        saisirNotes(note_eleves, nb_eleves);
-        break;
-    case 3:
-        saisirNombreEleves(note_eleves);
-        break;
-    case 4:
-        saisirNombreEleves(note_eleves);
-        break;
+
+        switch (choix)
+        {
+        case 1:
+            nb_eleves = saisirNombreEleves(note_eleves);
+            break;
+        case 2:
+            saisirNotes(note_eleves, nb_eleves);
+            break;
+        case 3:
+            afficherNotes(note_eleves, nb_eleves);
+            break;
+        case 4:
+            saisirNombreEleves(note_eleves);
+            break;
+        }
     }
     return 0;
 }
