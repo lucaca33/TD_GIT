@@ -93,6 +93,7 @@ void afficherNotes(int tab[30][3], int nb_eleves)
         }
         printf("%d", tab[i][2]);
     }
+    printf("\n");
 }
 
 float calculerMoyenneEleve(int tab[30][3], int n_eleve)
@@ -108,6 +109,7 @@ float calculerMoyenneEleve(int tab[30][3], int n_eleve)
         moyenne += tab[n_eleve][i];
     }
     moyenne /= 3;
+    printf("\n");
     return moyenne;
 }
 
@@ -117,14 +119,15 @@ void calculerMoyenne_demander(int tab[30][3], int nb_eleves)
     int nb;
     scanf("%d", &nb);
     nb--;
-    while (nb < 0 || nb > 29)
-    { // note : on aurait pu utiliser un do pour faire plus joli
-        printf("Numero d'eleve invalide.\n");
-        printf("Entrez le numero de l'eleve : ");
-        scanf("%d", &nb);
+    if (nb < 0 || nb > 29 || nb > nb_eleves)
+    {
+        printf("Numero d'eleve invalide");
+        return;
     }
-    float moyenne = calculerMoyenneEleve(tab, nb_eleves);
-    printf("La moyenne de l'eleve %d est %.2f", nb, moyenne);
+    
+    float moyenne = 0;
+    moyenne += calculerMoyenneEleve(tab, nb);
+    printf("La moyenne de l'eleve %d est %.2f", nb + 1, moyenne);
     return;
 }
 
@@ -142,7 +145,7 @@ void calculerMoyenneGenerale(int tab[30][3], int nb_eleves)
         moyenne += calculerMoyenneEleve(tab, i);
     }
     moyenne /= nb_eleves;
-    printf("La moyenne de la classe est de %f", moyenne);
+    printf("La moyenne de la classe est de %f\n", moyenne);
     return;
 }
 
@@ -153,7 +156,7 @@ int trouverMeilleureNoteControle(int tab[30][3], int nb_eleves, int indiceContro
         printf("L'incide du controle est incorrect");
         return 0;
     }
-    
+
     int best = tab[0][indiceControle];
     for (int i = 0; i < nb_eleves; i++)
     {
@@ -165,6 +168,14 @@ int trouverMeilleureNoteControle(int tab[30][3], int nb_eleves, int indiceContro
     return best;
 }
 
+void afficherMeilleuresNotes(int tab[30][3], int nb_eleves)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Meilleure note au controle %d : %d\n", i, trouverMeilleureNoteControle(tab, nb_eleves, i));
+    }
+}
+
 int main()
 {
     int nb_eleves = 0;
@@ -172,10 +183,9 @@ int main()
     int choix = -1;
     while (choix != 0)
     {
-
         afficherMenu();
         choix = lireChoix();
-
+        printf("================\n");
         switch (choix)
         {
         case 1:
@@ -190,8 +200,11 @@ int main()
         case 4:
             calculerMoyenne_demander(note_eleves, nb_eleves);
             break;
-        case 5: 
+        case 5:
             calculerMoyenneGenerale(note_eleves, nb_eleves);
+            break;
+        case 6:
+            afficherMeilleuresNotes(note_eleves, nb_eleves);
             break;
         }
     }
