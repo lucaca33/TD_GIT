@@ -1,0 +1,10 @@
+void afficherMenu();
+int lireChoix();
+int saisirNombreEleves(int note_eleves[30][3]);
+void saisirNotes(int eleves[30][3], int nb_eleves);
+void afficherNotes(int tab[30][3], int nb_eleves);
+float calculerMoyenneEleve(int tab[30][3], int n_eleve);
+void calculerMoyenne_demander(int tab[30][3], int nb_eleves);
+void calculerMoyenneGenerale(int tab[30][3], int nb_eleves);
+int trouverMeilleureNoteControle(int tab[30][3], int nb_eleves, int indiceControle);
+void afficherMeilleuresNotes(int tab[30][3], int nb_eleves);
