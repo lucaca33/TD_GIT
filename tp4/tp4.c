@@ -6,9 +6,9 @@ void afficherMenu()
     printf("1. Saisir le nombre d'eleves\n");
     printf("2. Saisir les notes des eleves\n");
     printf("3. Afficher toutes les notes\n");
-    printf("4. Afficher le moyenne d'un eleve\n");
-    printf("5. Afficher le moyenne generale\n");
-    printf("6. Afficher le meilleure note de chaque controle\n");
+    printf("4. Afficher la moyenne d'un eleve\n");
+    printf("5. Afficher la moyenne generale\n");
+    printf("6. Afficher la meilleure note de chaque controle\n");
     printf("0. Quitter\n");
 }
 
@@ -95,14 +95,42 @@ void afficherNotes(int tab[30][3], int nb_eleves)
     }
 }
 
+void calculerMoyenneEleve(int tab[30][3], int nb_eleves)
+{
+    printf("Entrez le numero de l'eleve : ");
+    int nb;
+    scanf("%d", &nb);
+    nb--;
+    while (nb < 1 || nb > 30)
+    { // note : on aurait pu utiliser un do pour faire plus joli
+        printf("Numero d'eleve invalide.\n");
+        printf("Entrez le numero de l'eleve : ");
+        scanf("%f", &nb);
+    }
+    float moyenne = 0;
+    if (tab[nb][0] == 0)
+    {
+        printf("Cet eleve n'as pas de note attribue\n");
+        return ;
+    }
+    
+    for (int i = 0; i < 3; i++)
+    {
+        moyenne += tab[nb][i];
+    }
+    moyenne /= 3;
+    printf("La moyenne de l'eleve %d est %.2f", nb, moyenne);
+    return;
+}
+
 int main()
 {
     int nb_eleves = 0;
     int note_eleves[30][3];
     for (int i = 0; i < 3; i++)
     {
-    afficherMenu();
-    int choix = lireChoix();
+        afficherMenu();
+        int choix = lireChoix();
 
         switch (choix)
         {
@@ -116,7 +144,7 @@ int main()
             afficherNotes(note_eleves, nb_eleves);
             break;
         case 4:
-            saisirNombreEleves(note_eleves);
+            calculerMoyenneEleve(note_eleves, nb_eleves);
             break;
         }
     }
