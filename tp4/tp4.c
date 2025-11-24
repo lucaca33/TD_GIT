@@ -95,6 +95,22 @@ void afficherNotes(int tab[30][3], int nb_eleves)
     }
 }
 
+float calculerMoyenneEleve(int tab[30][3], int n_eleve)
+{
+    if (tab[n_eleve][0] == -1)
+    {
+        printf("Cet eleve n'as pas de note attribue\n");
+        return 1.0f;
+    }
+    float moyenne = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        moyenne += tab[n_eleve][i];
+    }
+    moyenne /= 3;
+    return moyenne;
+}
+
 void calculerMoyenne_demander(int tab[30][3], int nb_eleves)
 {
     printf("Entrez le numero de l'eleve : ");
@@ -112,19 +128,21 @@ void calculerMoyenne_demander(int tab[30][3], int nb_eleves)
     return;
 }
 
-float calculerMoyenneEleve(int tab[30][3], int n_eleve)
+void calculerMoyenneGenerale(int tab[30][3], int nb_eleves)
 {
-    if (tab[n_eleve][0] == -1)
+    if (nb_eleves == 0)
     {
-        printf("Cet eleve n'as pas de note attribue\n");
+        printf("Il n'y a pas d'eleves\n");
         return;
     }
+
     float moyenne = 0;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < nb_eleves; i++)
     {
-        moyenne += tab[n_eleve][i];
+        moyenne += calculerMoyenneEleve(tab, i);
     }
-    moyenne /= 3;
+    moyenne /= nb_eleves;
+    printf("La moyenne de la classe est de %f", moyenne);
     return;
 }
 
@@ -151,7 +169,10 @@ int main()
             afficherNotes(note_eleves, nb_eleves);
             break;
         case 4:
-            calculerMoyenneEleve(note_eleves, nb_eleves);
+            calculerMoyenne_demander(note_eleves, nb_eleves);
+            break;
+        case 5: 
+            calculerMoyenneGenerale(note_eleves, nb_eleves);
             break;
         }
     }
