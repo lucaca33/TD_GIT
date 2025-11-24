@@ -19,5 +19,7 @@ int lireChoix(){
 }
 
 int main(){
+    afficherMenu();
+    lireChoix();
     return 0;
 }
