@@ -15,7 +15,8 @@ void menu_print()
     printf("=================================\n");
     printf("1. Ajouter une consommation\n");
     printf("2. Afficher le resume du jour\n");
-    printf("3. Sauvgarder et quitter\n");
+    printf("3. Afficher les objectifs et le score\n");
+    printf("4. Sauvgarder et quitter\n");
     printf("Votre choix : ");
 }
 
@@ -198,7 +199,8 @@ int humeurFruits(int nbFruits)
     }
 }
 
-void afficherBarre(int conso[7], int val, int max){
+void afficherBarre(int conso[7], int val, int max)
+{
     if (max <= 0)
     {
         max = 1;
@@ -211,16 +213,188 @@ void afficherBarre(int conso[7], int val, int max){
     {
         val = max;
     }
-    float casesPleines = (val * 10.0f) /max;
+    float casesPleines = (val * 10.0f) / max;
     for (int i = 0; i < 10; i++)
     {
         if (i < casesPleines)
         {
             printf("█");
         }
-        else{
+        else
+        {
             printf("░");
         }
     }
     printf("\n");
+}
+
+void afficher_objectifs(int conso[7], int objectif[7])
+{
+    printf("====== Objectifs du jour ======\n");
+    printf("Catégorie     Objectif   Atteint ? \n\n");
+    if (objectif[0] != 0)
+    {
+        printf("Eau       :  %d  ", objectif[0]);
+        if (objectif[0] <= conso[0])
+        {
+            printf("✅\n");
+        }
+        else
+        {
+            printf("❌\n");
+        }
+    }
+    else
+    {
+        printf("Eau       :  _   (pas d'objectif)\n");
+    }
+    if (objectif[1] != 0)
+    {
+        printf("Cafe      :  %d  ", objectif[1]);
+        if (objectif[1] <= conso[1])
+        {
+            printf("✅\n");
+        }
+        else
+        {
+            printf("❌\n");
+        }
+    }
+    else
+    {
+        printf("Cafe      :  _   (pas d'objectif)\n");
+    }
+    if (objectif[2] != 0)
+    {
+        printf("Bonbons   :  %d  ", objectif[2]);
+        if (objectif[2] <= conso[2])
+        {
+            printf("✅\n");
+        }
+        else
+        {
+            printf("❌\n");
+        }
+    }
+    else
+    {
+        printf("Bonbons   :  _   (pas d'objectif)\n");
+    }
+    if (objectif[3] != 0)
+    {
+        printf("Gateau    :  %d  ", objectif[3]);
+        if (objectif[3] <= conso[3])
+        {
+            printf("✅\n");
+        }
+        else
+        {
+            printf("❌\n");
+        }
+    }
+    else
+    {
+        printf("Gateau    :  _   (pas d'objectif)\n");
+    }
+    if (objectif[4] != 0)
+    {
+        printf("Legumes   :  %d  ", objectif[4]);
+        if (objectif[4] <= conso[4])
+        {
+            printf("✅\n");
+        }
+        else
+        {
+            printf("❌\n");
+        }
+    }
+    else
+    {
+        printf("Legumes   :  _   (pas d'objectif)\n");
+    }
+    if (objectif[5] != 0)
+    {
+        printf("Fruits    :  %d  ", objectif[5]);
+        if (objectif[5] <= conso[5])
+        {
+            printf("✅\n");
+        }
+        else
+        {
+            printf("❌\n");
+        }
+    }
+    else
+    {
+        printf("Fruits    :  _   (pas d'objectif)\n");
+    }
+    if (objectif[6] != 0)
+    {
+        printf("Protéine  :  %d  ", objectif[6]);
+        if (objectif[6] <= conso[6])
+        {
+            printf("✅\n");
+        }
+        else
+        {
+            printf("❌\n");
+        }
+    }
+    else
+    {
+        printf("Protéine  :  _   (pas d'objectif)\n");
+    }
+    int score = calculerScoreSante(conso, objectif);
+    printf("Score santé du jour : %d / 100\n", score);
+}
+
+int calculerScoreSante(int conso[7], int objectif[7])
+{
+    int score_base = 50;
+    if (conso[0] > objectif[0])
+    {
+        score_base += 10;
+    }
+    if (conso[4] > objectif[4])
+    {
+        score_base += 10;
+    }
+    if (conso[5] > objectif[5])
+    {
+        score_base += 10;
+    }
+    if (conso[6] > objectif[6])
+    {
+        score_base += 10;
+    }
+    if (conso[2] > 5)
+    {
+        if (conso[2] > 20)
+        {
+            score_base -= 15;
+        }
+        else
+        {
+            score_base -= conso[2] - 5;
+        }
+    }
+    if (conso[1] > 3)
+    {
+        if (conso[1] > 13)
+        {
+            score_base -= 20;
+        }
+        else
+        {
+            score_base -= (conso[2] - 3)*2;
+        }
+    }
+    if (score_base < 0)
+    {
+        score_base = 0;
+    }
+    else if (score_base > 100){
+        score_base = 100;
+    }
+    return score_base;
 }

@@ -6,6 +6,7 @@ int main()
     system("cls"); // clear le cmd
     utf8();
     int conso[7];
+    int objectif[7] = {8, 0, 0, 0, 5, 3, 2};
     int choix = 0;
     if (charger(conso) == 0)
     {
@@ -15,7 +16,7 @@ int main()
     else{
         printf("Chargement réussi\n");
     }
-    while (choix != 3)
+    while (choix != 4)
     {
         menu_print();
         choix = menu_choix();
@@ -29,6 +30,9 @@ int main()
             afficheResume(conso);
             break;
         case 3:
+            afficher_objectifs(conso, objectif);
+            break;
+        case 4:
             if (sauvegarder(conso) == 0){
                 printf("Sauvegarde échoué\n");
             }
