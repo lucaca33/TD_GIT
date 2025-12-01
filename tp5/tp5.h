@@ -14,5 +14,7 @@ void ajouterConsommation(int conso[7]);
 void afficheResume(int conso[7]);
 int charger(int conso[7]);
 int sauvegarder(int conso[7]);
-
+int humeurBonbons(int nbBonbons);
+int humeurLegumes(int nbLegumes);
+int humeurFruits(int nbFruits);
 #endif

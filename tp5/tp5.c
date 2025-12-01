@@ -61,13 +61,53 @@ void ajouterConsommation(int conso[7])
 void afficheResume(int conso[7])
 {
     printf("========= Resume du jour =========\n");
-    printf("Eau      :  %d\n", conso[0]);
-    printf("Cafe     :  %d\n", conso[1]);
-    printf("Bonbons  :  %d\n", conso[2]);
-    printf("Gateau   :  %d\n", conso[3]);
-    printf("Legumes  :  %d\n", conso[4]);
-    printf("Fruits   :  %d\n", conso[5]);
-    printf("Protéine :  %d\n", conso[6]);
+    printf("Eau      :  %d 💧\n", conso[0]);
+    printf("Cafe     :  %d ☕\n", conso[1]);
+    printf("Bonbons  :  %d 🍬 ", conso[2]);
+    switch (humeurBonbons(conso[2]))
+    {
+    case 0:
+        printf("😇\n");
+        break;
+    case 1:
+        printf("🙂\n");
+        break;
+    case 2:
+        printf("😒\n");
+        break;
+    case 3:
+        printf("😈\n");
+        break;
+    }
+    printf("Gateau   :  %d 🍰\n", conso[3]);
+    printf("Legumes  :  %d 🥦 ", conso[4]);
+    switch (humeurLegumes(conso[2]))
+    {
+    case 0:
+        printf("😭\n");
+        break;
+    case 1:
+        printf("🙂\n");
+        break;
+    case 2:
+        printf("😎\n");
+        break;
+    }
+    printf("Fruits   :  %d 🍎 ", conso[5]);
+    switch (humeurFruits(conso[2]))
+    {
+    case 0:
+        printf("😢\n");
+        break;
+    case 1:
+        printf("🙂\n");
+        break;
+    case 2:
+        printf("😄\n");
+        break;
+    }
+    printf("Protéine :  %d 🍗\n", conso[6]);
+    
     return;
 }
 
@@ -85,7 +125,8 @@ int charger(int conso[7])
     return 1;
 }
 
-int sauvegarder(int conso[7]){
+int sauvegarder(int conso[7])
+{
     FILE *f = fopen("consommation.txt", "w+");
     if (f == NULL)
     {
@@ -95,4 +136,56 @@ int sauvegarder(int conso[7]){
     fprintf(f, "%d %d %d %d %d %d %d", conso[0], conso[1], conso[2], conso[3], conso[4], conso[5], conso[6]);
     fclose(f);
     return 1;
+}
+
+int humeurBonbons(int nbBonbons)
+{
+    if (nbBonbons <= 3)
+    {
+        return 0;
+    }
+    if (nbBonbons <= 7)
+    {
+        return 1;
+    }
+    if (nbBonbons <= 12)
+    {
+        return 2;
+    }
+    else
+    {
+        return 3;
+    }
+}
+
+int humeurLegumes(int nbLegumes)
+{
+    if (nbLegumes <= 2)
+    {
+        return 2;
+    }
+    if (nbLegumes <= 4)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int humeurFruits(int nbFruits)
+{
+    if (nbFruits <= 2)
+    {
+        return 2;
+    }
+    if (nbFruits <= 4)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }

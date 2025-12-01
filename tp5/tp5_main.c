@@ -12,10 +12,15 @@ int main()
         printf("Aucune sauvgarde trouvée\n");
         inititaliser(conso);
     }
+    else{
+        printf("Chargement réussi\n");
+    }
     while (choix != 3)
     {
         menu_print();
         choix = menu_choix();
+        printf("%d", choix);
+        
         switch (choix)
         {
         case 1:
