@@ -1,10 +1,13 @@
 #include "tp5.h"
 #include <Windows.h>
 
-int main(){
+int main()
+{
     system("cls"); // clear le cmd
-    int conso[7] = {0};
+    utf8();
+    int conso[7];
     int choix = 0;
+    inititaliser(conso);
     while (choix != 3)
     {
         menu_print();
@@ -12,7 +15,7 @@ int main(){
         switch (choix)
         {
         case 1:
-            printf("choix n1\n");
+            ajouterConsommation(conso);
             break;
         case 2:
             printf("choix n2\n");
@@ -20,7 +23,7 @@ int main(){
         case 3:
             printf("choix n3\n");
             break;
-        
+
         default:
             printf("choix non reconnu\n");
         }

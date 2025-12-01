@@ -1,6 +1,14 @@
 #include "tp5.h"
 
-void menu_print(){
+void utf8()
+{
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+    setlocale(LC_ALL, ".UTF-8"); // ou ".65001" si ".UTF-8" ne passe pas
+}
+
+void menu_print()
+{
     printf("=================================\n");
     printf("      Suivi de consommation      \n");
     printf("=================================\n");
@@ -10,8 +18,40 @@ void menu_print(){
     printf("Votre choix : ");
 }
 
-int menu_choix(){
+int menu_choix()
+{
     int choix;
     scanf("%d", &choix);
     return choix;
+}
+void inititaliser(int conso[7])
+{
+    for (int i = 0; i < 7; i++)
+    {
+        conso[i] == 0;
+    }
+}
+
+void ajouterConsommation(int conso[7])
+{
+    printf("1. Eau 💧\n");
+    printf("2. Cafe ☕\n");
+    printf("3. Bonbons 🍬\n");
+    printf("4. Gateau 🍰\n");
+    printf("5. Legumes 🥦\n");
+    printf("6. Fruits 🍎\n");
+    printf("7. Protéines 🍗\n");
+    printf("Votre choix : ");
+    int choix = 0;
+    choix = menu_choix();
+    if (choix < 8 && choix > 0)
+    {
+        printf("Combien d'unités a ajouter ? ");
+        int combien = menu_choix();
+        conso[choix-1] += combien;
+        printf("Consommation mise a jour\n");
+    }
+    else{
+        printf("Nombre rentré invalide\n");
+    }
 }
