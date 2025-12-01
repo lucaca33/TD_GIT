@@ -28,7 +28,7 @@ void inititaliser(int conso[7])
 {
     for (int i = 0; i < 7; i++)
     {
-        conso[i] == 0;
+        conso[i] = 0;
     }
 }
 
@@ -58,7 +58,6 @@ void ajouterConsommation(int conso[7])
 
 void afficheResume(int conso[7]){
     printf("========= Resume du jour =========");
-
     printf("Eau      :  %d", conso[0]);
     printf("Cafe     :  %d", conso[1]);
     printf("Bonbons  :  %d", conso[2]);

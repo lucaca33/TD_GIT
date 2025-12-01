@@ -18,7 +18,7 @@ int main()
             ajouterConsommation(conso);
             break;
         case 2:
-            printf("choix n2\n");
+            afficheResume(conso);
             break;
         case 3:
             printf("choix n3\n");
