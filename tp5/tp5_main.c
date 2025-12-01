@@ -8,6 +8,7 @@ int main()
     int conso[7];
     int choix = 0;
     inititaliser(conso);
+    charger(conso);
     while (choix != 3)
     {
         menu_print();

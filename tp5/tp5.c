@@ -1,4 +1,5 @@
 #include "tp5.h"
+#include <stdlib.h>
 
 void utf8()
 {
@@ -48,15 +49,17 @@ void ajouterConsommation(int conso[7])
     {
         printf("Combien d'unités a ajouter ? ");
         int combien = menu_choix();
-        conso[choix-1] += combien;
+        conso[choix - 1] += combien;
         printf("Consommation mise a jour\n");
     }
-    else{
+    else
+    {
         printf("Nombre rentré invalide\n");
     }
 }
 
-void afficheResume(int conso[7]){
+void afficheResume(int conso[7])
+{
     printf("========= Resume du jour =========\n");
     printf("Eau      :  %d\n", conso[0]);
     printf("Cafe     :  %d\n", conso[1]);
@@ -65,5 +68,19 @@ void afficheResume(int conso[7]){
     printf("Legumes  :  %d\n", conso[4]);
     printf("Fruits   :  %d\n", conso[5]);
     printf("Protéine :  %d\n", conso[6]);
-    return ;
+    return;
+}
+
+int charger(int conso[7])
+{
+    FILE *f = fopen("consommation.txt", "r");
+    if (f == NULL)
+    {
+        printf("Erreur lors du chargement du fichier\n");
+        return 1;
+    }
+
+    fscanf(f, "%d%d%d%d%d%d%d", &conso[0], &conso[1], &conso[2], &conso[3], &conso[4], &conso[5], &conso[6]);
+    fclose(f);
+    return 0;
 }
