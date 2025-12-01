@@ -19,7 +19,6 @@ int main()
     {
         menu_print();
         choix = menu_choix();
-        printf("%d", choix);
         
         switch (choix)
         {

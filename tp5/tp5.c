@@ -25,6 +25,7 @@ int menu_choix()
     scanf("%d", &choix);
     return choix;
 }
+
 void inititaliser(int conso[7])
 {
     for (int i = 0; i < 7; i++)
@@ -35,6 +36,7 @@ void inititaliser(int conso[7])
 
 void ajouterConsommation(int conso[7])
 {
+    printf("==========\n");
     printf("1. Eau 💧\n");
     printf("2. Cafe ☕\n");
     printf("3. Bonbons 🍬\n");
@@ -61,53 +63,59 @@ void ajouterConsommation(int conso[7])
 void afficheResume(int conso[7])
 {
     printf("========= Resume du jour =========\n");
-    printf("Eau      :  %d 💧\n", conso[0]);
-    printf("Cafe     :  %d ☕\n", conso[1]);
+    printf("Eau      :  %d 💧 ", conso[0]);
+    afficherBarre(conso, conso[0], 13);
+    printf("Cafe     :  %d ☕ ", conso[1]);
+    afficherBarre(conso, conso[1], 5);
     printf("Bonbons  :  %d 🍬 ", conso[2]);
     switch (humeurBonbons(conso[2]))
     {
     case 0:
-        printf("😇\n");
+        printf("😇 ");
         break;
     case 1:
-        printf("🙂\n");
+        printf("🙂 ");
         break;
     case 2:
-        printf("😒\n");
+        printf("😒 ");
         break;
     case 3:
-        printf("😈\n");
+        printf("😈 ");
         break;
     }
-    printf("Gateau   :  %d 🍰\n", conso[3]);
+    afficherBarre(conso, conso[2], 15);
+    printf("Gateau   :  %d 🍰 ", conso[3]);
+    afficherBarre(conso, conso[3], 5);
     printf("Legumes  :  %d 🥦 ", conso[4]);
     switch (humeurLegumes(conso[2]))
     {
     case 0:
-        printf("😭\n");
+        printf("😭 ");
         break;
     case 1:
-        printf("🙂\n");
+        printf("🙂 ");
         break;
     case 2:
-        printf("😎\n");
+        printf("😎 ");
         break;
     }
+    afficherBarre(conso, conso[4], 10);
     printf("Fruits   :  %d 🍎 ", conso[5]);
     switch (humeurFruits(conso[2]))
     {
     case 0:
-        printf("😢\n");
+        printf("😢 ");
         break;
     case 1:
-        printf("🙂\n");
+        printf("🙂 ");
         break;
     case 2:
-        printf("😄\n");
+        printf("😄 ");
         break;
     }
-    printf("Protéine :  %d 🍗\n", conso[6]);
-    
+    afficherBarre(conso, conso[5], 10);
+    printf("Protéine :  %d 🍗 ", conso[6]);
+    afficherBarre(conso, conso[6], 7);
     return;
 }
 
@@ -188,4 +196,31 @@ int humeurFruits(int nbFruits)
     {
         return 0;
     }
+}
+
+void afficherBarre(int conso[7], int val, int max){
+    if (max <= 0)
+    {
+        max = 1;
+    }
+    if (val < 0)
+    {
+        val = 0;
+    }
+    else if (val > max)
+    {
+        val = max;
+    }
+    float casesPleines = (val * 10.0f) /max;
+    for (int i = 0; i < 10; i++)
+    {
+        if (i < casesPleines)
+        {
+            printf("█");
+        }
+        else{
+            printf("░");
+        }
+    }
+    printf("\n");
 }
