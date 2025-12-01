@@ -7,8 +7,11 @@ int main()
     utf8();
     int conso[7];
     int choix = 0;
-    inititaliser(conso);
-    charger(conso);
+    if (charger(conso) == 0)
+    {
+        printf("Aucune sauvgarde trouvée\n");
+        inititaliser(conso);
+    }
     while (choix != 3)
     {
         menu_print();
@@ -22,7 +25,12 @@ int main()
             afficheResume(conso);
             break;
         case 3:
-            printf("choix n3\n");
+            if (sauvegarder(conso) == 0){
+                printf("Sauvegarde échoué\n");
+            }
+            else{
+                printf("Sauvegarde réussie");
+            }
             break;
 
         default:

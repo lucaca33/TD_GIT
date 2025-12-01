@@ -77,10 +77,22 @@ int charger(int conso[7])
     if (f == NULL)
     {
         printf("Erreur lors du chargement du fichier\n");
-        return 1;
+        return 0;
     }
 
     fscanf(f, "%d%d%d%d%d%d%d", &conso[0], &conso[1], &conso[2], &conso[3], &conso[4], &conso[5], &conso[6]);
     fclose(f);
-    return 0;
+    return 1;
+}
+
+int sauvegarder(int conso[7]){
+    FILE *f = fopen("consommation.txt", "w+");
+    if (f == NULL)
+    {
+        printf("Erreur lors du chargement du fichier\n");
+        return 0;
+    }
+    fprintf(f, "%d %d %d %d %d %d %d", conso[0], conso[1], conso[2], conso[3], conso[4], conso[5], conso[6]);
+    fclose(f);
+    return 1;
 }
