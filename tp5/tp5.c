@@ -55,3 +55,16 @@ void ajouterConsommation(int conso[7])
         printf("Nombre rentré invalide\n");
     }
 }
+
+void afficheResume(int conso[7]){
+    printf("========= Resume du jour =========");
+
+    printf("Eau      :  %d", conso[0]);
+    printf("Cafe     :  %d", conso[1]);
+    printf("Bonbons  :  %d", conso[2]);
+    printf("Gateau   :  %d", conso[3]);
+    printf("Legumes  :  %d", conso[4]);
+    printf("Fruits   :  %d", conso[5]);
+    printf("Protéine :  %d", conso[6]);
+    return ;
+}
