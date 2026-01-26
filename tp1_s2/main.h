@@ -22,6 +22,9 @@ void utf8();
 int demander_range();
 int demander_table();
 void demander_chemin_fichier(char chemin[25]);
-void lire_fichier(char c[25], Eleve eleve[50]);
+int lire_fichier(char c[25], Eleve* eleve);
+void initialiser_places(Place places[100][100], int row, int col);
+void placer_eleves(Place p[100][100], Eleve* e, int row_max, int col_max, int nb_eleve);
+void afficher_plan(Place p[100][100], int row_max, int col_max);
 
 #endif
