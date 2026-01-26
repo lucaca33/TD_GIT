@@ -18,7 +18,10 @@ typedef struct Place
     int occupe; // 0 pour non occupé et 2 pour occupé
 }Place;
 
-void demander_range();
-void demander_table();
+void utf8();
+int demander_range();
+int demander_table();
+void demander_chemin_fichier(char chemin[25]);
+void lire_fichier(char c[25], Eleve eleve[50]);
 
 #endif

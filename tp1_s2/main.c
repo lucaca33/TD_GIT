@@ -1,21 +1,14 @@
 #include "main.h"
-#include <stdlib.h>
 
-void utf8()
-{
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-    setlocale(LC_ALL, ".UTF-8"); // ou ".65001" si ".UTF-8" ne passe pas
-}
-
-void demander_range(){
-    printf("Entrez nb rangée");
-}
-
-void demander_table(){
-
-}
 
 int main(){
+    utf8();
+    int nb_rangee = demander_range();
+    int nb_table = demander_table();
+    char chemin[25];
+    demander_chemin_fichier(chemin);
+    printf("fichier : %s", chemin);
+    Eleve eleve[50];
+    lire_fichier(chemin, eleve);
     return 0;
 }
