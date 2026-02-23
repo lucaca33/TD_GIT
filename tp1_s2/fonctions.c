@@ -35,7 +35,7 @@ void demander_chemin_fichier(char chemin[25])
     scanf("%s", chemin);
 }
 
-int lire_fichier(char c[25], Eleve* eleve)
+int lire_fichier(char c[25], Eleve *eleve)
 {
     if (eleve == NULL)
     {
@@ -46,11 +46,12 @@ int lire_fichier(char c[25], Eleve* eleve)
     char line[256];
     char nom[128], prenom[128];
     int i = 0;
+    printf("\n");
     while (fgets(line, sizeof(line), fichier))
     {
         if (sscanf(line, "%127s %127s", prenom, nom) == 2)
         {
-            printf("%s, %s\n", prenom, nom);
+            printf("%d) %s, %s\n", i + 1, prenom, nom);
             strcpy(eleve[i].nom, nom);
             strcpy(eleve[i].prenom, prenom);
             i++;
@@ -86,22 +87,47 @@ void placer_eleves(Place p[100][100], Eleve *e, int row_max, int col_max, int nb
         return;
     }
 
-    int row_current = 1;
+    int row_current = 0;
     int eleve_par_row = nb_eleve / row_max;
     if (eleve_par_row > col_max)
     {
         printf("Pas assez de place pour faire rentrer tout les élèves");
         return;
     }
-    while (row_current <= row_max)
+
+    int temp_nb_eleves = nb_eleve;
+    int temp_nb_eleves_par_row = eleve_par_row;
+    // la logique pour placer les élèves / occuper les places
+    while (row_current <= row_max - 1) // on fait chaque rangée
     {
-        float col = 0.0f;
-        while (col <= (float)col_max)
+        // printf("%d, %d\n", row_current, row_max-1);
+        if (eleve_par_row == col_max)
         {
-            col += eleve_par_row;
-            p[row_current-1][(int)col].occupe = 1;
+            for (int i = 0; i < col_max; i++)
+            {
+                p[row_current][i].occupe = 1;
+            }
+        }
+        else // eleves_par_row : nb de gens qu'on dois placer ; col_max : longueur
+        {
+            p[row_current][0].occupe = 1;
+            temp_nb_eleves_par_row--;
+            for (int i = 1; i <= eleve_par_row; i++)
+            {
+                int taille = col_max - 1; // on enlève l parceque on a dejà placé le mec au début
+                int espacement = taille / eleve_par_row;
+                p[row_current][espacement * i].occupe = 1;
+                if (temp_nb_eleves_par_row != 1)
+                {
+                    temp_nb_eleves_par_row--;
+                }
+            }
         }
         row_current++;
+        temp_nb_eleves -= eleve_par_row;
+        if (row_max - row_current > 0)
+            eleve_par_row = temp_nb_eleves / (row_max - row_current);
+        temp_nb_eleves_par_row = eleve_par_row;
     }
 }
 
@@ -122,7 +148,7 @@ void afficher_plan(Place p[100][100], int row_max, int col_max)
             }
             else
             {
-                printf("x");
+                printf("-");
             }
         }
         printf("\n");

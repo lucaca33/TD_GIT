@@ -14,5 +14,6 @@ int main(){
     initialiser_places(places, nb_rangee, nb_table);
     placer_eleves(places, eleve, nb_rangee, nb_table, nb_eleve);
     afficher_plan(places, nb_rangee, nb_table);
+    
     return 0;
 }
