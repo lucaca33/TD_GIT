@@ -96,7 +96,8 @@ void placer_eleves(Place p[100][100], Eleve *e, int row_max, int col_max, int nb
     }
 
     int temp_nb_eleves = nb_eleve;
-    int temp_nb_eleves_par_row = eleve_par_row;
+    int temp1;
+    int temp2;
     // la logique pour placer les élèves / occuper les places
     while (row_current <= row_max - 1) // on fait chaque rangée
     {
@@ -110,16 +111,18 @@ void placer_eleves(Place p[100][100], Eleve *e, int row_max, int col_max, int nb
         }
         else // eleves_par_row : nb de gens qu'on dois placer ; col_max : longueur
         {
+            temp1 = eleve_par_row;
+            temp2 = 0;
             p[row_current][0].occupe = 1;
-            temp_nb_eleves_par_row--;
             for (int i = 1; i <= eleve_par_row; i++)
             {
                 int taille = col_max - 1; // on enlève l parceque on a dejà placé le mec au début
-                int espacement = taille / eleve_par_row;
-                p[row_current][espacement * i].occupe = 1;
-                if (temp_nb_eleves_par_row != 1)
+                int espacement = (taille - i) / temp1;
+                temp2 += espacement;
+                p[row_current][i + temp2].occupe = 1;
+                if (temp1 != 1)
                 {
-                    temp_nb_eleves_par_row--;
+                    temp1--;
                 }
             }
         }
@@ -127,7 +130,6 @@ void placer_eleves(Place p[100][100], Eleve *e, int row_max, int col_max, int nb
         temp_nb_eleves -= eleve_par_row;
         if (row_max - row_current > 0)
             eleve_par_row = temp_nb_eleves / (row_max - row_current);
-        temp_nb_eleves_par_row = eleve_par_row;
     }
 }
 
