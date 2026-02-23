@@ -1,9 +1,10 @@
-#ifndef eleves
-#define eleves
+#ifndef ELEVES
+#define ELEVES
 #include <windows.h> 
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct Eleve
 {
@@ -25,6 +26,7 @@ void demander_chemin_fichier(char chemin[25]);
 int lire_fichier(char c[25], Eleve* eleve);
 void initialiser_places(Place places[100][100], int row, int col);
 void placer_eleves(Place p[100][100], Eleve* e, int row_max, int col_max, int nb_eleve);
-void afficher_plan(Place p[100][100], int row_max, int col_max);
+void afficher_plan(Place p[100][100],Eleve* eleves, int* places_numero, int row_max, int col_max);
+void randomiser_eleves(Place p[100][100], int nb_eleve, int* places_numero);
 
 #endif

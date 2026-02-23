@@ -133,8 +133,42 @@ void placer_eleves(Place p[100][100], Eleve *e, int row_max, int col_max, int nb
     }
 }
 
-void afficher_plan(Place p[100][100], int row_max, int col_max)
+void randomiser_eleves(Place p[100][100], int nb_eleve, int* places_numero)
 {
+    srand(time(NULL));
+    int l_eleves_non_places[100];
+    for (int i = 0; i < nb_eleve; i++)
+    {
+        l_eleves_non_places[i] = -1;
+    }
+    int random;
+    int nouv_place = 0;
+    for (int i = 0; i < nb_eleve; i++)
+    {
+        // trouver une nouvelle place non prise
+        while (!nouv_place)
+        {
+            random = rand() % 17;
+            for (int i = 0; i < nb_eleve; i++)
+            {
+                if (random == i && l_eleves_non_places[i] == -1)
+                {
+                    nouv_place = 1;
+                    l_eleves_non_places[i] = nb_eleve+1; // on peut plus tomber sur ce nombre
+                    break;
+                }
+            }
+        }
+        places_numero[i] = random;
+        nouv_place = 0;
+    }
+}
+
+void afficher_plan(Place p[100][100],Eleve *eleves, int* places_numero, int row_max, int col_max)
+{
+    printf("\n");
+    printf("=====================================================================================================================\n");
+    int num = 0;
     if (p == NULL)
     {
         printf("Erreur\n");
@@ -146,13 +180,16 @@ void afficher_plan(Place p[100][100], int row_max, int col_max)
         {
             if (p[i][j].occupe)
             {
-                printf("o");
+                printf("%s %s", eleves[places_numero[num]].nom, eleves[places_numero[num]].prenom);
+                num++;
             }
             else
             {
-                printf("-");
+                printf("       x       ");
             }
         }
         printf("\n");
     }
+    printf("=====================================================================================================================\n");
+    
 }
