@@ -140,7 +140,7 @@ int load_songs(char filename[256], song *Tab_song, int *max_song_nb)
         }
         // on rajoute dans un tableau de song les infos du son chargé
 
-        if ((*max_song_nb) >= count)
+        if ((*max_song_nb) < count)
         {
             (*max_song_nb) *= 2;
             Tab_song = realloc(Tab_song, sizeof(song) * (*max_song_nb));
@@ -175,25 +175,25 @@ void init_tab(song *Tab_song, int size)
     }
 }
 
-void melanger_chansons(song* Tab_song, int size){
+void melanger_chansons(song *Tab_song, int size)
+{
     if (Tab_song == NULL)
     {
         return;
     }
-    
-    
+
     int i1 = 0;
     int i2 = 1;
-    
+
     song temp;
 
-    for (int i = 0; i < 3*size; i++) // comme ça on est sur que a peu près tout est randomisé
+    for (int i = 0; i < 3 * size; i++) // comme ça on est sur que a peu près tout est randomisé
     {
-        i1 = rand()%size;
-        i2 = rand()%size;
+        i1 = rand() % size;
+        i2 = rand() % size;
 
         temp = Tab_song[i1];
-        
+
         Tab_song[i1] = Tab_song[i2];
         Tab_song[i2] = temp;
     }
@@ -202,12 +202,13 @@ void melanger_chansons(song* Tab_song, int size){
 liste_joueur** creer_liste_joueurs(){
     int nb_joueurs = 5;
     liste_joueur** liste= malloc(sizeof(liste_joueur*)*nb_joueurs);
-    
+
 
 }*/
 
-joueur* creer_joueur(){
-    joueur * player = malloc(sizeof(joueur));
+joueur *creer_joueur()
+{
+    joueur *player = malloc(sizeof(joueur));
     printf("Nom : ");
     scanf("%s", &player->nom);
     return player;
@@ -220,12 +221,12 @@ int main()
     int max_song_number = 100;
 
     song *tab_son = malloc(sizeof(song) * max_song_number); // on crée un tableau de 100 chansons
-
+    
     int num_songs_loaded = load_songs("songs.txt", tab_son, &max_song_number); // remplissage du tableau
-
+    
     melanger_chansons(tab_son, num_songs_loaded);
 
-    joueur* player = creer_joueur();
+    joueur *player = creer_joueur();
 
     // TODO : chargement de liste des joueurs
 
@@ -234,32 +235,36 @@ int main()
 
     char essai[256];
 
+    getchar();
+
     // boucle pour les musiques
     printf("\n==================== BLIND TEST\n");
     for (int i = 0; i < num_songs_loaded; i++)
     {
+        strcpy(essai, "");
         strcpy(bonTitre, tab_son[i].title);
         strcpy(bonArtiste, tab_son[i].artist);
 
         printf("Devinez cette musique (ou l'artiste pour la moitie des points) !\n\n\n");
         printf("nom : %s\n\n", bonTitre);
-        play_song_excerpt_at(tab_son[i].chemin, 5, 5);
-        
-        scanf("%s", &essai);
-        
-        if (essai == bonTitre)
+        play_song_excerpt_at(tab_son[i].chemin, (int)(rand()%20 + 5),10);
+
+        fgets(essai, 256, stdin);
+        essai[strcspn(essai, "\n")] = '\0';
+
+        if (string_equals_normalized(essai, bonTitre))
         {
             printf("Bravo, vous avez trouve le titre ! \n\n");
         }
-        else if (essai == bonArtiste)
+        else if (string_equals_normalized(essai, bonArtiste))
         {
             printf("Bravo, vous avez trouve l'artiste ! \n\n");
         }
-        else{
+        else
+        {
             printf("Oh non, vous n'avez pas trouve\n\n\n");
         }
     }
-    
 
     return 0;
 }
