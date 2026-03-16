@@ -198,7 +198,20 @@ void melanger_chansons(song* Tab_song, int size){
         Tab_song[i2] = temp;
     }
 }
+/*
+liste_joueur** creer_liste_joueurs(){
+    int nb_joueurs = 5;
+    liste_joueur** liste= malloc(sizeof(liste_joueur*)*nb_joueurs);
+    
 
+}*/
+
+joueur* creer_joueurs(){
+    joueur * player = malloc(sizeof(joueur));
+    printf("NOMMMM : ");
+    scanf("%d", player->nom);
+    return player;
+}
 
 int main()
 {
@@ -212,7 +225,7 @@ int main()
 
     melanger_chansons(tab_son, num_songs_loaded);
 
-    
+    liste_joueur** creer_joueurs();
 
     return 0;
 }
