@@ -1,9 +1,4 @@
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <ctype.h>
+#include "blindtest.h"
 
 
 /* -------------------------------------------------- */
@@ -60,8 +55,8 @@ Compare deux chaînes après normalisation.
 Retourne 1 si elles sont équivalentes, sinon 0.
 */
 int string_equals_normalized(const char *a, const char *b) {
-    char na[100];
-    char nb[100];
+    char na[256];
+    char nb[256];
 
     normalize_string(na, a);
     normalize_string(nb, b);
@@ -88,8 +83,53 @@ void play_song_excerpt_at(const char *filename, int start, int seconds) {
     system(command);
 }
 
+/*
+Charge les morceaux depuis songs.txt dans un tableau.
+Retourne le nombre de morceaux chargés.
+*/
+int load_songs(char filename[256], song** Tab_song) {
+    FILE *f;
+    char line[3 * 256];
+    int count = 0;
 
+    f = fopen(filename, "r");
+    if (f == NULL) {
+        perror("Erreur ouverture songs.txt");
+        return -1;
+    }
 
+    while (fgets(line, sizeof(line), f) != NULL && count < 100) {
+        char *file;
+        char *title;
+        char *artist;
+
+        trim_newline(line);
+
+        if (strlen(line) == 0) {
+            continue;
+        }
+
+        file = strtok(line, ";");
+        title = strtok(NULL, ";");
+        artist = strtok(NULL, ";");
+
+        if (file == NULL || title == NULL || artist == NULL) {
+            printf("Ligne ignoree dans songs.txt.\n");
+            continue;
+        }
+        // on rajoute dans un tableau de song lees infos du son chargé
+        if (Tab_song[count] != NULL){
+            strcpy(Tab_song[count]->chemin, file);
+            strcpy(Tab_song[count]->title, title);
+            strcpy(Tab_song[count]->artist, artist);
+        }
+
+        count++;
+    }
+
+    fclose(f);
+    return count;
+}
 
 /* -------------------------------------------------- */
 /* PROGRAMME PRINCIPAL                                */
@@ -97,7 +137,7 @@ void play_song_excerpt_at(const char *filename, int start, int seconds) {
 
 int main() {
 
-
+    song** tab_son = malloc(sizeof(song*)*100); // on crée un tableau de 100 chansons
 
     return 0;
 }
