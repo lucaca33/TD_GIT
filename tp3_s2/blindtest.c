@@ -60,8 +60,8 @@ Compare deux chaînes après normalisation.
 Retourne 1 si elles sont équivalentes, sinon 0.
 */
 int string_equals_normalized(const char *a, const char *b) {
-    char na[MAX_STR];
-    char nb[MAX_STR];
+    char na[100];
+    char nb[100];
 
     normalize_string(na, a);
     normalize_string(nb, b);
@@ -82,8 +82,8 @@ void play_song_excerpt_at(const char *filename, int start, int seconds) {
     char command[1024];
 
     snprintf(command, sizeof(command),
-             "ffplay -nodisp -autoexit -loglevel quiet -ss %d -t %d \"%s\"",
-             start, seconds, filename);
+            "ffplay -nodisp -autoexit -loglevel quiet -ss %d -t %d \"%s\"",
+            start, seconds, filename);
 
     system(command);
 }
