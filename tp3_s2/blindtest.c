@@ -135,9 +135,33 @@ int load_songs(char filename[256], song** Tab_song) {
 /* PROGRAMME PRINCIPAL                                */
 /* -------------------------------------------------- */
 
+
+void init_tab(song** Tab_song, int size){
+    if (Tab_song == NULL)
+    {
+        return;
+    }
+    for (int i = 0; i < size; i++)
+    {
+        Tab_song[i] = malloc(sizeof(song));
+        if (Tab_song[i] != NULL)
+        {
+            strcpy(Tab_song[i]->chemin, "");
+            strcpy(Tab_song[i]->title, "");
+            strcpy(Tab_song[i]->artist, "");
+        }
+    }
+}
+
+
 int main() {
 
-    song** tab_son = malloc(sizeof(song*)*100); // on crée un tableau de 100 chansons
+    int max_song_number = 100;
+
+    song** tab_son = malloc(sizeof(song*)*max_song_number); // on crée un tableau de 100 chansons
+
+    int num_songs_loaded = load_songs("songs.txt", tab_son); // remplissage du tableau
+
 
     return 0;
 }
