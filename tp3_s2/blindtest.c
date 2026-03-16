@@ -215,6 +215,53 @@ joueur *creer_joueur()
     return player;
 }
 
+char* charger_scores(int* best, char nom[256], char chemin[256]){ // chemin = "scores.txt"
+    if (best == NULL || nom == NULL)
+    {
+        return;
+    }
+    
+    FILE *f = fopen(chemin, "r");
+    if (f == NULL)
+    {
+        perror("Erreur ouverture songs.txt");
+        return;
+    }
+    char line[3 * 256];
+    int count = 0;
+
+    while (fgets(line, sizeof(line), f) != NULL && count < 100)
+    {
+        char *nom_lu;
+        char *score_txt;
+
+        trim_newline(line);
+
+        if (strlen(line) == 0)
+        {
+            continue;
+        }
+
+        nom_lu = strtok(line, ";");
+        score_txt = strtok(NULL, ";");
+
+        if (nom_lu == NULL || score_txt == NULL)
+        {
+            printf("Ligne ignoree dans scores.txt.\n");
+            continue;
+        }
+
+        if ((int)score_txt >= *best) // pas sur que ca marche
+        {
+            *best = (int)score_txt;
+            strcpy(*nom, nom_lu);
+        }
+        
+
+        count++;
+    }
+}
+
 int main()
 {
     srand(time(NULL));
@@ -240,7 +287,7 @@ int main()
 
     // boucle pour les musiques
     printf("\n==================== BLIND TEST\n");
-    printf("\n====================\n");
+    printf("\n====================\n");/*
     for (int i = 0; i < num_songs_loaded; i++)
     {
         strcpy(essai, "");
@@ -269,8 +316,11 @@ int main()
             printf("Oh non, vous n'avez pas trouve\n\n\n");
         }
         printf("\n====================\n");
-    }
-
+    }*/
+    int best = -1;
+    char nom_best[256];
+    strcpy(nom_best, charger_scores(&best, nom_best, "scores.txt"));
+    printf("best : %d par %s", best, nom_best);
     printf("Le score final est : %d points pour %s , BRAVO !!!", player->score, player->nom);
 
     return 0;
