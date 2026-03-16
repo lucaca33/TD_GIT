@@ -14,11 +14,25 @@ typedef struct song
     char artist[256];
 }song;
 
-void init_tab(song** Tab_song);
+typedef struct joueur
+{
+    char nom[256];
+    int score;
+}joueur;
+typedef struct liste_joueur
+{
+    char nom[256];
+    int meilleur_score;
+    joueur * 
+}liste_joueur;
 
-int load_songs(char filename[256], song** Tab_song);
 
-void melanger_chansons(...);
+
+void init_tab(song* Tab_song);
+
+int load_songs(char filename[256], song *Tab_song, int *max_song_nb);
+
+void melanger_chansons(song* Tab_song, int size);
 void charger_scores(...);
 void update_score(...);
 void sauver_scores(...);

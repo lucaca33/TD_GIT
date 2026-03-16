@@ -161,7 +161,7 @@ int load_songs(char filename[256], song *Tab_song, int *max_song_nb)
 /* PROGRAMME PRINCIPAL                                */
 /* -------------------------------------------------- */
 
-void init_tab(song **Tab_song, int size)
+void init_tab(song *Tab_song, int size)
 {
     if (Tab_song == NULL)
     {
@@ -169,24 +169,50 @@ void init_tab(song **Tab_song, int size)
     }
     for (int i = 0; i < size; i++)
     {
-        Tab_song[i] = malloc(sizeof(song));
-        if (Tab_song[i] != NULL)
-        {
-            strcpy(Tab_song[i]->chemin, "");
-            strcpy(Tab_song[i]->title, "");
-            strcpy(Tab_song[i]->artist, "");
-        }
+        strcpy(Tab_song[i].chemin, "");
+        strcpy(Tab_song[i].title, "");
+        strcpy(Tab_song[i].artist, "");
     }
 }
 
+void melanger_chansons(song* Tab_song, int size){
+    if (Tab_song == NULL)
+    {
+        return;
+    }
+    
+    
+    int i1 = 0;
+    int i2 = 1;
+    
+    song temp;
+
+    for (int i = 0; i < 3*size; i++) // comme ça on est sur que a peu près tout est randomisé
+    {
+        i1 = rand()%size;
+        i2 = rand()%size;
+
+        temp = Tab_song[i1];
+        
+        Tab_song[i1] = Tab_song[i2];
+        Tab_song[i2] = temp;
+    }
+}
+
+
 int main()
 {
+    srand(time(NULL));
 
     int max_song_number = 100;
 
     song *tab_son = malloc(sizeof(song) * max_song_number); // on crée un tableau de 100 chansons
 
     int num_songs_loaded = load_songs("songs.txt", tab_son, &max_song_number); // remplissage du tableau
+
+    melanger_chansons(tab_son, num_songs_loaded);
+
+    
 
     return 0;
 }
