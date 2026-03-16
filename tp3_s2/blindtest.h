@@ -37,7 +37,7 @@ void melanger_chansons(song* Tab_song, int size);
 
 joueur* creer_joueur();
 
-liste_joueur** creer_liste_joueurs();
+liste_joueur** creer_liste_joueurs(); // sert a rien pour l'instant
 /*
 void charger_scores(...);
 void update_score(...);

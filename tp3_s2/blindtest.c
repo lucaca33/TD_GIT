@@ -227,6 +227,39 @@ int main()
 
     joueur* player = creer_joueur();
 
-    printf("player nom : %s", player->nom);
+    // TODO : chargement de liste des joueurs
+
+    char bonTitre[256];
+    char bonArtiste[256];
+
+    char essai[256];
+
+    // boucle pour les musiques
+    printf("\n==================== BLIND TEST\n");
+    for (int i = 0; i < num_songs_loaded; i++)
+    {
+        strcpy(bonTitre, tab_son[i].title);
+        strcpy(bonArtiste, tab_son[i].artist);
+
+        printf("Devinez cette musique (ou l'artiste pour la moitie des points) !\n\n\n");
+        printf("nom : %s\n\n", bonTitre);
+        play_song_excerpt_at(tab_son[i].chemin, 5, 5);
+        
+        scanf("%s", &essai);
+        
+        if (essai == bonTitre)
+        {
+            printf("Bravo, vous avez trouve le titre ! \n\n");
+        }
+        else if (essai == bonArtiste)
+        {
+            printf("Bravo, vous avez trouve l'artiste ! \n\n");
+        }
+        else{
+            printf("Oh non, vous n'avez pas trouve\n\n\n");
+        }
+    }
+    
+
     return 0;
 }
