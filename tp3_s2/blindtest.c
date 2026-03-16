@@ -211,6 +211,7 @@ joueur *creer_joueur()
     joueur *player = malloc(sizeof(joueur));
     printf("Nom : ");
     scanf("%s", &player->nom);
+    player->score = 0;
     return player;
 }
 
@@ -221,9 +222,9 @@ int main()
     int max_song_number = 100;
 
     song *tab_son = malloc(sizeof(song) * max_song_number); // on crée un tableau de 100 chansons
-    
+
     int num_songs_loaded = load_songs("songs.txt", tab_son, &max_song_number); // remplissage du tableau
-    
+
     melanger_chansons(tab_son, num_songs_loaded);
 
     joueur *player = creer_joueur();
@@ -239,15 +240,16 @@ int main()
 
     // boucle pour les musiques
     printf("\n==================== BLIND TEST\n");
+    printf("\n====================\n");
     for (int i = 0; i < num_songs_loaded; i++)
     {
         strcpy(essai, "");
         strcpy(bonTitre, tab_son[i].title);
         strcpy(bonArtiste, tab_son[i].artist);
 
-        printf("Devinez cette musique (ou l'artiste pour la moitie des points) !\n\n\n");
+        printf("Devinez cette musique (ou l'artiste) !\n\n\n");
         printf("nom : %s\n\n", bonTitre);
-        play_song_excerpt_at(tab_son[i].chemin, (int)(rand()%20 + 5),10);
+        play_song_excerpt_at(tab_son[i].chemin, (int)(rand() % 20 + 5), 10);
 
         fgets(essai, 256, stdin);
         essai[strcspn(essai, "\n")] = '\0';
@@ -255,16 +257,21 @@ int main()
         if (string_equals_normalized(essai, bonTitre))
         {
             printf("Bravo, vous avez trouve le titre ! \n\n");
+            player->score += 1;
         }
         else if (string_equals_normalized(essai, bonArtiste))
         {
             printf("Bravo, vous avez trouve l'artiste ! \n\n");
+            player->score += 1;
         }
         else
         {
             printf("Oh non, vous n'avez pas trouve\n\n\n");
         }
+        printf("\n====================\n");
     }
+
+    printf("Le score final est : %d points pour %s , BRAVO !!!", player->score, player->nom);
 
     return 0;
 }
