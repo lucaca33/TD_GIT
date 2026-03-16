@@ -140,7 +140,7 @@ int load_songs(char filename[256], song *Tab_song, int *max_song_nb)
         }
         // on rajoute dans un tableau de song les infos du son chargé
 
-        if (max_song_nb >= count)
+        if ((*max_song_nb) >= count)
         {
             (*max_song_nb) *= 2;
             Tab_song = realloc(Tab_song, sizeof(song) * (*max_song_nb));
@@ -206,10 +206,10 @@ liste_joueur** creer_liste_joueurs(){
 
 }*/
 
-joueur* creer_joueurs(){
+joueur* creer_joueur(){
     joueur * player = malloc(sizeof(joueur));
-    printf("NOMMMM : ");
-    scanf("%d", player->nom);
+    printf("Nom : ");
+    scanf("%s", &player->nom);
     return player;
 }
 
@@ -225,7 +225,8 @@ int main()
 
     melanger_chansons(tab_son, num_songs_loaded);
 
-    liste_joueur** creer_joueurs();
+    joueur* player = creer_joueur();
 
+    printf("player nom : %s", player->nom);
     return 0;
 }
