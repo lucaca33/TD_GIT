@@ -215,7 +215,7 @@ joueur *creer_joueur()
     return player;
 }
 
-char* charger_scores(int* best, char nom[256], char chemin[256]){ // chemin = "scores.txt"
+void charger_scores(int* best, char nom[256], char chemin[256]){ // chemin = "scores.txt"
     if (best == NULL || nom == NULL)
     {
         return;
@@ -253,8 +253,8 @@ char* charger_scores(int* best, char nom[256], char chemin[256]){ // chemin = "s
 
         if ((int)score_txt >= *best) // pas sur que ca marche
         {
-            *best = (int)score_txt;
-            strcpy(*nom, nom_lu);
+            *best = atoi(score_txt); // la fonction atoi convertie un nombre comme "123" en entier 123. on peut pas utiliser la technique du -'0' parceque c'est pas un seul charactère. possible de faire sans la fonction mais trop long
+            strcpy(nom, nom_lu);
         }
         
 
@@ -319,7 +319,17 @@ int main()
     }*/
     int best = -1;
     char nom_best[256];
-    strcpy(nom_best, charger_scores(&best, nom_best, "scores.txt"));
+    charger_scores(&best, nom_best, "scores.txt");
+    // afficher nombest voi si ca marche ou si ça cours hahahaahahaaa
+    /*
+    int i = 0;
+    while (nom_best[i] != '\0')
+    {
+        printf("%c", nom_best[i]);
+        i++;
+    }*/
+    printf("\n\n\n");
+    
     printf("best : %d par %s", best, nom_best);
     printf("Le score final est : %d points pour %s , BRAVO !!!", player->score, player->nom);
 

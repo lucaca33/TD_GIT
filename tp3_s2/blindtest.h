@@ -39,7 +39,7 @@ joueur* creer_joueur();
 
 liste_joueur** creer_liste_joueurs(); // sert a rien pour l'instant
 
-char* charger_scores(int* best, char* nom[256], char chemin[256]);
+void charger_scores(int* best, char nom[256], char chemin[256]);
 /*
 void update_score(...);
 void sauver_scores(...);
