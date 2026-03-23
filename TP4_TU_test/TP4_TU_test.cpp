@@ -48,8 +48,11 @@ namespace TP4TUtest
 		}
 		TEST_METHOD(TestDivisionExacte)
 		{
-			Assert::AreEqual(divisionExacte(14,2), 1);
-			Assert::AreEqual(divisionExacte(15, 2), 0);
+			Assert::AreEqual(divisionExacte(10,2), 1);
+			Assert::AreEqual(divisionExacte(10, 3), 0);
+			Assert::AreEqual(divisionExacte(0, 5), 1);
+			Assert::AreEqual(divisionExacte(10, 0), 0);
+			// ce cas est dangereux car on divise par 0
 
 		}
 		TEST_METHOD(TestSommeTableau)
