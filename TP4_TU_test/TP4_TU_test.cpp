@@ -57,10 +57,14 @@ namespace TP4TUtest
 		}
 		TEST_METHOD(TestSommeTableau)
 		{
-			int test1[5] = { 1,2,3,4,-5 };
-			Assert::AreEqual(sommeTableau(test1, 5), 5);
-			int test2[6] = { 4,2,6,0,16,7 };
-			Assert::AreEqual(sommeTableau(test2, 6), 35);
+			int test1[] = { 1,2,3 };
+			Assert::AreEqual(sommeTableau(test1, 3), 6);
+			int test2[] = { 5 };
+			Assert::AreEqual(sommeTableau(test2, 1), 5);
+			int test3[] = { -1, 4, -3 };
+			Assert::AreEqual(sommeTableau(test3, 3), 0);
+			//int test4[] = {}; impossible de faire un tableau vide
+			//Assert::AreEqual(sommeTableau(test2, 3), 0);
 
 		}
 	};
