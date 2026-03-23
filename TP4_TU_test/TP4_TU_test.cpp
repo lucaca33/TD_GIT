@@ -37,5 +37,13 @@ namespace TP4TUtest
 			Assert::AreEqual(divisionExacte(15, 2), 0);
 
 		}
+		TEST_METHOD(TestSommeTableau)
+		{
+			int test1[5] = { 1,2,3,4,-5 };
+			Assert::AreEqual(sommeTableau(test1, 5), 5);
+			int test2[6] = { 4,2,6,0,16,7 };
+			Assert::AreEqual(sommeTableau(test2, 6), 35);
+
+		}
 	};
 }
