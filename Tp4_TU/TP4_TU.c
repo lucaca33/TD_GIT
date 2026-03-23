@@ -8,7 +8,7 @@ int max2(int a, int b) {
     if (a > b) {
         return a;
     }
-    return a;
+    return b;
 }
 
 int factorielle(int n) {
