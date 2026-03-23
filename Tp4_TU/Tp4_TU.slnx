@@ -4,5 +4,5 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="../TP4_TU_test/TP4_TU_test.vcxproj" />
-  <Project Path="Tp4_TU.vcxproj" />
+  <Project Path="Tp4_TU.vcxproj" Id="04eb64da-b2e0-41f4-a44b-dc15c296012d" />
 </Solution>

@@ -24,7 +24,11 @@ namespace TP4TUtest
 		}
 		TEST_METHOD(TestMax2)
 		{
-			Assert::AreEqual(max2(7,5), 7);
+			Assert::AreEqual(max2(5, 3), 5);
+			Assert::AreEqual(max2(3, 5), 5);
+			Assert::AreEqual(max2(-1, -8), -1);
+			Assert::AreEqual(max2(4, 4), 4);
+			// le test 2 
 		}
 		TEST_METHOD(TestFactorielle)
 		{
