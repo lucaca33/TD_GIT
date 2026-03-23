@@ -32,12 +32,18 @@ namespace TP4TUtest
 		}
 		TEST_METHOD(TestFactorielle)
 		{
+			Assert::AreEqual(factorielle(0), 1);
+			Assert::AreEqual(factorielle(1), 1);
+			Assert::AreEqual(factorielle(4), 24);
 			Assert::AreEqual(factorielle(5), 120);
+			// non, le comportement sur les négatifs ne doit pas etre accepté, on doit renvoyer un NULL
 		}
 		TEST_METHOD(TestContientMajuscule)
 		{
-			Assert::AreEqual(contientMajuscule("comment il S'apelle"), 1);
-			Assert::AreEqual(contientMajuscule("il s'apelle kante"), 0);
+			Assert::AreEqual(contientMajuscule("bonjour"), 0);
+			Assert::AreEqual(contientMajuscule("BonJour"), 1);
+			Assert::AreEqual(contientMajuscule("ABC"), 1);
+			Assert::AreEqual(contientMajuscule(""), 0);
 
 		}
 		TEST_METHOD(TestDivisionExacte)
