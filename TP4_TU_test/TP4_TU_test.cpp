@@ -28,6 +28,14 @@ namespace TP4TUtest
 		TEST_METHOD(TestContientMajuscule)
 		{
 			Assert::AreEqual(contientMajuscule("comment il S'apelle"), 1);
+			Assert::AreEqual(contientMajuscule("il s'apelle kante"), 0);
+
+		}
+		TEST_METHOD(TestDivisionExacte)
+		{
+			Assert::AreEqual(divisionExacte(14,2), 1);
+			Assert::AreEqual(divisionExacte(15, 2), 0);
+
 		}
 	};
 }
