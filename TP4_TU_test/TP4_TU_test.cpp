@@ -25,5 +25,9 @@ namespace TP4TUtest
 		{
 			Assert::AreEqual(factorielle(5), 120);
 		}
+		TEST_METHOD(TestContientMajuscule)
+		{
+			Assert::AreEqual(contientMajuscule("comment il S'apelle"), 1);
+		}
 	};
 }
