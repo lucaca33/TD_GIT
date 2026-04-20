@@ -16,14 +16,14 @@ int saisir_medoc(medicament *tab, int max)
 
     while (i < max && choix == 1)
     {
-        printf("rentrer nom medicament : ");
-        fgets(tab[i].nom, 256, stdin);
+        printf("rentrer nom medicament (pas d'espace) : ");
+        scanf("%s", tab[i].nom);
         printf("rentrer code medicament (pas d'espace) : ");
-        scanf("%s", &tab[i].code);
+        scanf("%s", tab[i].code);
         printf("rentrer date fabrication medicament (ANNEE-MOIS-JOUR) : ");
-        scanf("%s", &tab[i].date_fabrication);
+        scanf("%s", tab[i].date_fabrication);
         printf("rentrer date peremption medicament (ANNEE-MOIS-JOUR) : ");
-        scanf("%s", &tab[i].date_peremption);
+        scanf("%s", tab[i].date_peremption);
 
         printf("rentrer prix (nombre entier) : ");
         scanf("%d", &tab[i].prix);
@@ -49,7 +49,7 @@ void swap(medicament *xp, medicament *yp) {
     *yp = temp;
 }
 
-void bubbleSort(medicament *tab, int n) {
+void tri_bulle_peremption(medicament *tab, int n) {
     if (tab == NULL)
     {
         return;
@@ -60,7 +60,7 @@ void bubbleSort(medicament *tab, int n) {
     for (i = 0; i < n - 1; i++) {
         swapped = 0;
         for (j = 0; j < n - i - 1; j++) {
-            if (strcmp(tab[j].date_fabrication, tab[j + 1].date_fabrication)>0) {
+            if (strcmp(tab[j].date_peremption, tab[j + 1].date_peremption)>0) {
                 swap(&tab[j], &tab[j + 1]);
                 swapped = 1;
             }
@@ -81,11 +81,7 @@ int main()
 
     int vrai_taille = saisir_medoc(tab_medoc, taille);
 
-    printf("aa %s aa %d", tab_medoc[0].nom, tab_medoc[0].prix);
-
-    bubbleSort(tab_medoc, vrai_taille);
-
-    printf("aa %s aa %d", tab_medoc[0].nom, tab_medoc[0].prix);
+    tri_bulle_peremption(tab_medoc, vrai_taille);
 
     return 0;
 }
