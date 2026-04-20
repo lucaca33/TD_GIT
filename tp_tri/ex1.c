@@ -17,20 +17,20 @@ int saisir_medoc(medicament *tab, int max)
     while (i < max && choix == 1)
     {
         printf("rentrer nom medicament : ");
-        fgets(tab[0].nom, 256, stdin);
+        fgets(tab[i].nom, 256, stdin);
         printf("rentrer code medicament (pas d'espace) : ");
-        scanf("%s", &tab[0].code);
+        scanf("%s", &tab[i].code);
         printf("rentrer date fabrication medicament (ANNEE-MOIS-JOUR) : ");
-        scanf("%s", &tab[0].date_fabrication);
+        scanf("%s", &tab[i].date_fabrication);
         printf("rentrer date peremption medicament (ANNEE-MOIS-JOUR) : ");
-        scanf("%s", &tab[0].date_peremption);
+        scanf("%s", &tab[i].date_peremption);
 
         printf("rentrer prix (nombre entier) : ");
-        scanf("%d", &tab[0].prix);
+        scanf("%d", &tab[i].prix);
         printf("rentrer nombre de vente : ");
-        scanf("%d", &tab[0].nb_vente);
+        scanf("%d", &tab[i].nb_vente);
         printf("rentrer nombre de stock : ");
-        scanf("%d", &tab[0].nb_stock);
+        scanf("%d", &tab[i].nb_stock);
         i++;
         printf("Ajouter nouveau medicament (1 : oui, 0: non)?");
         scanf("%d", &choix);
