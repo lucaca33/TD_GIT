@@ -73,6 +73,35 @@ void tri_bulle_peremption(medicament *tab, int n) {
     }
 }
 
+
+void recherche(medicament *tab, int taille, char val[50]){
+    // on suppose le tableau trié par nom;
+    int N = taille-1;
+    int debut = 0;
+    int fin = N;
+    int trouve = 0;
+    int mil = 0;
+
+    while (!trouve && debut <= fin)
+    {
+        mil = (debut+fin)/2;
+        if (tab[mil].nom == val)
+        {
+            trouve = 1;
+        }
+        else
+        {
+            if (strcmp())
+            {
+                /* code */
+            }
+            
+        }
+        
+    }
+    
+}
+
 int main()
 {
 
